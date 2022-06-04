@@ -9,10 +9,59 @@ class CartItem extends React.Component {
             img: ''
 
         }
+
         //this.increaseQuantity=this.increaseQuantity.bind(this);
+        this.testing();
     }
-    increaseQuantity=()=>{
-        console.log(this.state);
+    testing() {
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('done');
+            }, 5000);
+        })
+        promise.then(() => {
+            //synchonus
+            this.setState({ qty: 100 });
+            console.log("state ", this.state);
+        });
+    }
+    increaseQuantity = () => {
+        // console.log(this.state);
+        this.setState({
+            qty: this.state.qty + 1//shallow merging
+        })// rerender the page
+
+        /*this.setState((prevState) => {
+            return {
+                qty: prevState.qty + 1
+            }
+        },()=>{
+            //callback
+        })*/
+
+    }// arrow fn bind the value automatically
+
+    decreaseQuantity = () => {
+        // console.log(this.state);
+        /* this.setState({
+             qty: this.state.qty + 1//shallow merging
+         })*/// rerender the page
+
+        if (this.state.qty > 0) {
+            this.setState((prevState) => {
+                return {
+
+                    qty: prevState.qty - 1
+
+
+                }
+            }, () => {
+                ///callback
+                console.log(this.state);
+
+            })////asynchronous
+        }
+
     }// arrow fn bind the value automatically
     render() {
         const { price, title, qty } = this.state;
@@ -29,20 +78,21 @@ class CartItem extends React.Component {
                         <img
                             alt="increase"
                             className="action-icons"
-                            src="https://cdn-icons-png.flaticon.com/512/992/992651.png" 
-                           // onClick={this.increaseQuantity.bind(this)}// bind the functions so that reference is not lost
-                           onClick={this.increaseQuantity}
+                            src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                            // onClick={this.increaseQuantity.bind(this)}// bind the functions so that reference is not lost
+                            onClick={this.increaseQuantity}
                         />
-                            
+
                         <img
                             alt="decrease"
                             className="action-icons"
-                            src="https://cdn-icons-png.flaticon.com/512/992/992683.png" 
+                            src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+                            onClick={this.decreaseQuantity}
                         />
                         <img
                             alt="delete"
                             className="action-icons"
-                            src="https://cdn-icons.flaticon.com/png/512/3569/premium/3569930.png?token=exp=1654332369~hmac=e9b1990224f84a171b943442e92b0012" 
+                            src="https://cdn-icons.flaticon.com/png/512/3569/premium/3569930.png?token=exp=1654332369~hmac=e9b1990224f84a171b943442e92b0012"
                         />
                     </div>
 
