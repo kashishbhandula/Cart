@@ -67,29 +67,39 @@ class App extends React.Component {
       products: products
     })
   }
-  getCartCount(){
-    const{products}=this.state;
-    let count=0;
+  getCartCount() {
+    const { products } = this.state;
+    let count = 0;
     products.forEach(product => {
-      count+=product.qty;
-      
+      count += product.qty;
+
     });
     return count;
+  }
+  getCartTotal() {
+    const { products } = this.state;
+    let total = 0;
+    products.forEach(product => {
+      total += product.price;
+
+    });
+    return total;
   }
   render() {
     const { products } = this.state;
     return (
-      
+
       <div className="App" >
-        <Navbar 
-        count={this.getCartCount()}
+        <Navbar
+          count={this.getCartCount()}
         />
-        <Cart 
-        products={products}
-        onIncreaseQuantity={this.handleIncreaseQuantity}
-        onDecreaseQuantity={this.handleDecreaseQuantity}
-        onDelete={this.handleDelete}
+        <Cart
+          products={products}
+          onIncreaseQuantity={this.handleIncreaseQuantity}
+          onDecreaseQuantity={this.handleDecreaseQuantity}
+          onDelete={this.handleDelete}
         />
+        <div style={{padding:10,fontSize:20}}>Total: {this.getCartTotal()}</div>
 
       </div>
     )
