@@ -41,11 +41,11 @@ const CartItem = (props) => {
 
     // }// arrow fn bind the value automatically
 
-     const { price, title, qty } = props.product;
-     
+    const { price, title, qty } = props.product;
+
     // //console.log(this.props);//props passed from parent
     return (
-        
+
         <div className="cart-item" >
             <div className="left-block">
                 <img style={styles.image} />
