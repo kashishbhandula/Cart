@@ -1,107 +1,88 @@
 import React from "react";
-class CartItem extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            price: 999,
-            title: 'Phone',
-            qty: 1,
-            img: ''
-
-        }
-
-        //this.increaseQuantity=this.increaseQuantity.bind(this);
-        this.testing();
-    }
-    testing() {
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('done');
-            }, 5000);
-        })
-        promise.then(() => {
-            //synchonus
-            this.setState({ qty: 100 });
-            console.log("state ", this.state);
-        });
-    }
-    increaseQuantity = () => {
-        // console.log(this.state);
-        this.setState({
-            qty: this.state.qty + 1//shallow merging
-        })// rerender the page
-
-        /*this.setState((prevState) => {
-            return {
-                qty: prevState.qty + 1
-            }
-        },()=>{
-            //callback
-        })*/
-
-    }// arrow fn bind the value automatically
-
-    decreaseQuantity = () => {
-        // console.log(this.state);
-        /* this.setState({
-             qty: this.state.qty + 1//shallow merging
-         })*/// rerender the page
-
-        if (this.state.qty > 0) {
-            this.setState((prevState) => {
-                return {
-
-                    qty: prevState.qty - 1
+const CartItem = (props) => {
 
 
-                }
-            }, () => {
-                ///callback
-                console.log(this.state);
+    // increaseQuantity = () => {
+    //     // console.log(this.state);
+    //     this.setState({
+    //         qty: this.state.qty + 1//shallow merging
+    //     })// rerender the page
 
-            })////asynchronous
-        }
+    //     /*this.setState((prevState) => {
+    //         return {
+    //             qty: prevState.qty + 1
+    //         }
+    //     },()=>{
+    //         //callback
+    //     })*/
 
-    }// arrow fn bind the value automatically
-    render() {
-        const { price, title, qty } = this.state;
-        return (
-            <div className="cart-item" >
-                <div className="left-block">
-                    <img style={styles.image} />
+    // }// arrow fn bind the value automatically
+
+    // decreaseQuantity = () => {
+    //     // console.log(this.state);
+    //     /* this.setState({
+    //          qty: this.state.qty + 1//shallow merging
+    //      })*/// rerender the page
+
+    //     if (this.state.qty > 0) {
+    //         this.setState((prevState) => {
+    //             return {
+
+    //                 qty: prevState.qty - 1
+
+
+    //             }
+    //         }, () => {
+    //             ///callback
+    //             //console.log(this.state);
+
+    //         })////asynchronous
+    //     }
+
+    // }// arrow fn bind the value automatically
+
+     const { price, title, qty } = props.product;
+     
+    // //console.log(this.props);//props passed from parent
+    return (
+        
+        <div className="cart-item" >
+            <div className="left-block">
+                <img style={styles.image} />
+            </div>
+            <div className="right-block">
+                <div style={{ fontSize: 25 }}>{title}</div>
+                <div style={{ color: '#777' }}>{price}</div>
+                <div style={{ fontSize: 25 }}>Qty: {qty}</div>
+                <div className="cart-item-actions">
+                    <img
+                        alt="increase"
+                        className="action-icons"
+                        src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                        // onClick={this.increaseQuantity.bind(this)}// bind the functions so that reference is not lost
+                        onClick={() => { props.onIncreaseQuantity(props.product) }}
+                    />
+
+                    <img
+                        alt="decrease"
+                        className="action-icons"
+                        src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+                        onClick={() => { props.onDecreaseQuantity(props.product) }}
+                    />
+                    <img
+                        alt="delete"
+                        className="action-icons"
+                        src="https://cdn-icons.flaticon.com/png/512/3569/premium/3569930.png?token=exp=1654332369~hmac=e9b1990224f84a171b943442e92b0012"
+                        onClick={() => { props.onDelete(props.product) }}
+                    />
                 </div>
-                <div className="right-block">
-                    <div style={{ fontSize: 25 }}>{title}</div>
-                    <div style={{ color: '#777' }}>{price}</div>
-                    <div style={{ fontSize: 25 }}>Qty: {qty}</div>
-                    <div className="cart-item-actions">
-                        <img
-                            alt="increase"
-                            className="action-icons"
-                            src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-                            // onClick={this.increaseQuantity.bind(this)}// bind the functions so that reference is not lost
-                            onClick={this.increaseQuantity}
-                        />
-
-                        <img
-                            alt="decrease"
-                            className="action-icons"
-                            src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
-                            onClick={this.decreaseQuantity}
-                        />
-                        <img
-                            alt="delete"
-                            className="action-icons"
-                            src="https://cdn-icons.flaticon.com/png/512/3569/premium/3569930.png?token=exp=1654332369~hmac=e9b1990224f84a171b943442e92b0012"
-                        />
-                    </div>
-
-                </div >
 
             </div >
-        );
 
-    }
+        </div >
+    );
+
+
 }
 const styles = {
     image: {
@@ -110,7 +91,7 @@ const styles = {
         borderRadius: 4,
         background: '#ccc'
     }
-}
+};
 export default CartItem;
 
 /*
