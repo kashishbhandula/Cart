@@ -41,14 +41,14 @@ const CartItem = (props) => {
 
     // }// arrow fn bind the value automatically
 
-    const { price, title, qty } = props.product;
+    const { price, title, qty,img} = props.product;
 
     // //console.log(this.props);//props passed from parent
     return (
 
         <div className="cart-item" >
             <div className="left-block">
-                <img style={styles.image} />
+                <img style={styles.image} src={img} />
             </div>
             <div className="right-block">
                 <div style={{ fontSize: 25 }}>{title}</div>
@@ -72,7 +72,7 @@ const CartItem = (props) => {
                     <img
                         alt="delete"
                         className="action-icons"
-                        src="https://cdn-icons.flaticon.com/png/512/3569/premium/3569930.png?token=exp=1654332369~hmac=e9b1990224f84a171b943442e92b0012"
+                        src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
                         onClick={() => { props.onDelete(props.product) }}
                     />
                 </div>
